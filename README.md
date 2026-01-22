@@ -22,6 +22,30 @@ This approach mirrors Blok's methodology: grounding synthetic user agents in rea
 
 100k orders from 2016–2018 with rich behavioral signals: purchase frequency, basket composition, payment preferences, review sentiment, and delivery experience. The granularity enables clustering by behavioral tendencies rather than demographics.
 
+### Setup Instructions
+
+1. **Install Kaggle CLI** (in your virtual environment):
+   ```bash
+   pip3 install kaggle
+   ```
+
+2. **Configure Kaggle API credentials**:
+   - Go to https://www.kaggle.com/settings/account
+   - Scroll to "API" section and click "Create New Token"
+   - This downloads `kaggle.json` with your credentials
+   - Move it to the correct location:
+     ```bash
+     mkdir -p ~/.kaggle
+     mv ~/Downloads/kaggle.json ~/.kaggle/
+     chmod 600 ~/.kaggle/kaggle.json
+     ```
+
+3. **Download and extract the dataset**:
+   ```bash
+   kaggle datasets download -d olistbr/brazilian-ecommerce -p ./data/raw
+   unzip -o ./data/raw/brazilian-ecommerce.zip -d ./data/raw
+   ```
+
 ## High-Level Workflow
 
 ### Phase 1: Behavioral Clustering

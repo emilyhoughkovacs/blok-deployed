@@ -1,0 +1,6 @@
+venv/
+
+# Data files
+data/
+!data/.gitkeep
+!data/raw/.gitkeep
