@@ -1,0 +1,176 @@
+cluster_id,persona_name,decision,response,scenario_name
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: You're looking at a smartphone priced at R$1,200. 
+The seller offers 10x installments of R$120 with ...",financing_offer
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: FLASH SALE: A kitchen blender you've been eyeing is now 40% off!
+Original price: R$250 → Sale price:...",flash_sale
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: You need to buy replacement ink cartridges for your printer.
+Single cartridge: R$45 each
+Bundle of 3...",bundle_deal
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: You've never bought fitness equipment online before, but you see an ad:
+Adjustable dumbbells set for...",new_category
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: You found the exact wireless earbuds you want at R$180.
+However, the reviews are mixed: 3.5 stars ov...",mixed_reviews
+0,Mainstream Shopper,Unclear,"[MOCK MODE] As a typical weekday shopper, I'd consider this purchase carefully. I usually buy what I need and move on. Given this scenario, I'd likely proceed if it meets my specific need and the price is reasonable.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+1,Weekend Buyer,Unclear,"[MOCK MODE] I typically browse on weekends when I have time. This seems interesting, but I'd want to think it over during my weekend shopping time.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+2,Cash Customer,Unclear,"[MOCK MODE] I prefer to pay upfront with boleto. If this requires installments or credit, I'd hesitate. I don't like carrying debt for purchases.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+3,High-Value Financing Shopper,Unclear,"[MOCK MODE] I'm comfortable with larger purchases when I can spread payments. If 10x installments are available, the monthly cost matters more than total price.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+4,Bulk Buyer,Unclear,"[MOCK MODE] I prefer to bundle purchases together. If there's a deal for buying multiple, I'd be more interested. Single items feel less efficient to me.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+5,Loyal Explorer Customer,Unclear,"[MOCK MODE] I'm always open to trying new categories. As a repeat customer, I trust this marketplace and would consider exploring this option.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
+6,Critical Shopper,Unclear,"[MOCK MODE] I have high standards. Before deciding, I'd want to see the reviews carefully. If there are quality concerns, I'd pass regardless of the price.
+
+Scenario received: It's Tuesday, and you see a promotion:
+'WEEKEND SPECIAL: 20% off all home decor items, Saturday-Sund...",weekend_promo
