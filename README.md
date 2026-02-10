@@ -22,31 +22,148 @@ This approach mirrors Blok's methodology: grounding synthetic user agents in rea
 
 100k orders from 2016–2018 with rich behavioral signals: purchase frequency, basket composition, payment preferences, review sentiment, and delivery experience. The granularity enables clustering by behavioral tendencies rather than demographics.
 
-### Setup Instructions
+## Quickstart
 
-1. **Install Kaggle CLI** (in your virtual environment):
-   ```bash
-   pip3 install kaggle
-   ```
+### 1. Clone the repository
 
-2. **Configure Kaggle API credentials**:
-   - Go to https://www.kaggle.com/settings/account
-   - Scroll to "API" section and click "Create New Token"
-   - This downloads `kaggle.json` with your credentials
-   - Move it to the correct location:
-     ```bash
-     mkdir -p ~/.kaggle
-     mv ~/Downloads/kaggle.json ~/.kaggle/
-     chmod 600 ~/.kaggle/kaggle.json
-     ```
+```bash
+git clone https://github.com/your-username/blok-deployed.git
+cd blok-deployed
+```
 
-3. **Download and extract the dataset**:
-   ```bash
-   kaggle datasets download -d olistbr/brazilian-ecommerce -p ./data/raw
-   unzip -o ./data/raw/brazilian-ecommerce.zip -d ./data/raw
-   ```
+### 2. Create a virtual environment
+
+From the project root, create and activate a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Download the data from Kaggle
+
+Install the Kaggle CLI and configure your API credentials:
+
+```bash
+pip3 install kaggle
+```
+
+Go to https://www.kaggle.com/settings/account, scroll to "API", and click "Create New Token". This downloads `kaggle.json`. Move it into place:
+
+```bash
+mkdir -p ~/.kaggle
+mv ~/Downloads/kaggle.json ~/.kaggle/
+chmod 600 ~/.kaggle/kaggle.json
+```
+
+Download and extract the dataset into the project's `data/raw/` directory:
+
+```bash
+kaggle datasets download -d olistbr/brazilian-ecommerce -p ./data/raw
+unzip -o ./data/raw/brazilian-ecommerce.zip -d ./data/raw
+```
+
+### 4. Install the package
+
+```bash
+pip install -e ".[all]"
+```
+
+This installs `persona_clustering` as an importable package with all dependencies (pandas, scikit-learn, anthropic, pytest, etc.). The `[all]` extra includes both the `[agent]` and `[dev]` optional groups.
+
+### 5. Configure your API key (for agent simulation)
+
+Agent simulation calls the Claude API, which requires an Anthropic API key. Get one at https://console.anthropic.com/settings/keys, then create a `.env` file in the project root:
+
+```bash
+echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
+```
+
+The pipeline loads this automatically via `python-dotenv`. You can skip this step if you only plan to use mock mode (step 7).
+
+### 6. Run the end-to-end pipeline
+
+```bash
+python scripts/run_pipeline.py
+```
+
+This runs all 4 stages in sequence — load data, engineer features, cluster, generate personas — and saves outputs to `data/processed/`.
+
+Useful flags:
+- `--evaluate-k` — run silhouette/inertia analysis for k=2..10 before fitting
+- `--no-save` — run everything in memory without writing files
+- `--n-clusters 5` — override the default k=7
+
+### 7. Run agent simulation
+
+With mock responses (no API calls, good for testing the flow):
+
+```bash
+python scripts/evaluate.py --mock
+```
+
+With live Claude API responses (requires the `.env` file from step 5):
+
+```bash
+python scripts/evaluate.py
+```
+
+This runs 6 purchase scenarios across all 7 personas (42 simulations), validates consistency, and saves results to `notebooks/outputs/simulation/`.
+
+### 8. Testing
+
+**Pytest** — runs 16 tests using synthetic data (no raw CSVs needed):
+
+```bash
+pytest tests/test_pipeline.py -v
+```
+
+Tests cover config validation, feature engineering, clustering, persona profiling, and agent mock responses. Smoke tests that require the raw data auto-skip if the CSVs aren't present.
+
+**Interactive module testing** — import and run individual stages in a Python shell:
+
+```python
+from persona_clustering.data import loader
+raw_data = loader.run(save=False)
+
+from persona_clustering.features import engineering
+features = engineering.run(raw_data, save=False)
+
+from persona_clustering.models import clustering
+result = clustering.run(features.transformed_features, save=False)
+
+from persona_clustering.personas import profiler
+personas = profiler.run(features.raw_features, result.labels, save=False)
+```
+
+Each module's `run()` function takes the output of the previous stage and returns a dataclass. Use `save=False` to keep it from writing files so you can inspect return values without side effects.
+
+## Project Structure
+
+```
+├── src/persona_clustering/        # Main Python package
+│   ├── config.py                  # Centralized paths, feature lists, hyperparameters
+│   ├── data/loader.py             # Load and merge 7 Olist CSVs
+│   ├── features/engineering.py    # Compute 9 behavioral features + log transforms
+│   ├── models/clustering.py       # StandardScaler + KMeans (k=7)
+│   └── personas/
+│       ├── profiler.py            # Generate persona names, descriptions, system prompts
+│       └── agent.py               # Claude agent wrapper + scenario simulation
+├── scripts/
+│   ├── run_pipeline.py            # CLI: data → features → clusters → personas
+│   └── evaluate.py                # CLI: run agent simulation across scenarios
+├── tests/
+│   └── test_pipeline.py           # Unit + smoke tests (pytest)
+├── notebooks/                     # Jupyter notebooks (exploration & visualization)
+├── data/
+│   ├── raw/                       # Olist CSV files (git-ignored)
+│   └── processed/                 # Generated outputs (features, models, personas.json)
+└── pyproject.toml                 # Package metadata and dependencies
+```
 
 ## Workflow
+
+The pipeline logic lives in the `persona_clustering` Python package. The notebooks remain available for interactive exploration and visualization, but the package is the authoritative implementation.
 
 ### Phase 1: Exploratory Data Analysis
 [`01_eda_behavioral_clustering.ipynb`](notebooks/01_eda_behavioral_clustering.ipynb)
@@ -54,22 +171,22 @@ This approach mirrors Blok's methodology: grounding synthetic user agents in rea
 Explore the raw transaction data to understand distributions, identify behavioral signals, and assess data quality. Examines purchase patterns, payment methods, review behavior, and delivery outcomes.
 
 ### Phase 2: Feature Engineering
-[`02_feature_engineering_clustering.ipynb`](notebooks/02_feature_engineering_clustering.ipynb)
+[`02_feature_engineering_clustering.ipynb`](notebooks/02_feature_engineering_clustering.ipynb) | `persona_clustering.features.engineering`
 
 Transform raw transactions into customer-level behavioral features: purchase frequency, monetary value, basket size, installment usage, credit card preference, category diversity, review sentiment, and shopping timing.
 
 ### Phase 3: Clustering
-[`03_clustering.ipynb`](notebooks/03_clustering.ipynb)
+[`03_clustering.ipynb`](notebooks/03_clustering.ipynb) | `persona_clustering.models.clustering`
 
 Apply K-means clustering to identify distinct behavioral segments. Evaluate cluster quality using elbow method and silhouette scores. Final model: 7 clusters across 93,357 customers.
 
 ### Phase 4: Persona Profiling
-[`04_persona_profiling.ipynb`](notebooks/04_persona_profiling.ipynb)
+[`04_persona_profiling.ipynb`](notebooks/04_persona_profiling.ipynb) | `persona_clustering.personas.profiler`
 
 Characterize each cluster with representative statistics and z-scores. Generate natural language persona descriptions and decision heuristics. Output: structured persona profiles with LLM-ready system prompts.
 
 ### Phase 5: Agent Simulation
-[`05_agent_simulation.ipynb`](notebooks/05_agent_simulation.ipynb)
+[`05_agent_simulation.ipynb`](notebooks/05_agent_simulation.ipynb) | `persona_clustering.personas.agent`
 
 Instantiate Claude-powered agents from persona profiles. Run 6 product scenarios across all 7 personas (42 simulations). Validate that agent responses align with underlying behavioral profiles.
 
