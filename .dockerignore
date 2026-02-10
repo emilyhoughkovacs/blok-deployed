@@ -1,0 +1,38 @@
+# Virtual environment
+venv/
+
+# Data files (mounted as volume at runtime)
+data/
+
+# Outputs (mounted as volume at runtime)
+outputs/
+
+# Git
+.git/
+.gitignore
+
+# IDE and OS
+.vscode/
+.DS_Store
+*.swp
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Secrets (NEVER bake API keys into images)
+.env
+
+# Large files not needed in image
+process.pdf
+*.zip
+
+# Notebooks (not needed for pipeline execution)
+notebooks/
+
+# Claude/spec files
+.claude/
+specs/

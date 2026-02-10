@@ -31,16 +31,7 @@ git clone https://github.com/your-username/blok-deployed.git
 cd blok-deployed
 ```
 
-### 2. Create a virtual environment
-
-From the project root, create and activate a virtual environment:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Download the data from Kaggle
+### 2. Download the data from Kaggle
 
 Install the Kaggle CLI and configure your API credentials:
 
@@ -63,15 +54,15 @@ kaggle datasets download -d olistbr/brazilian-ecommerce -p ./data/raw
 unzip -o ./data/raw/brazilian-ecommerce.zip -d ./data/raw
 ```
 
-### 4. Install the package
+### 3. Build the Docker image
 
 ```bash
-pip install -e ".[all]"
+docker compose build
 ```
 
-This installs `persona_clustering` as an importable package with all dependencies (pandas, scikit-learn, anthropic, pytest, etc.). The `[all]` extra includes both the `[agent]` and `[dev]` optional groups.
+This builds a container with Python 3.12, all dependencies, and the project source code. First build takes 2–3 minutes; subsequent rebuilds use cached layers and complete in seconds.
 
-### 5. Configure your API key (for agent simulation)
+### 4. Configure your API key (for agent simulation)
 
 Agent simulation calls the Claude API, which requires an Anthropic API key. Get one at https://console.anthropic.com/settings/keys, then create a `.env` file in the project root:
 
@@ -79,46 +70,64 @@ Agent simulation calls the Claude API, which requires an Anthropic API key. Get 
 echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
 ```
 
-The pipeline loads this automatically via `python-dotenv`. You can skip this step if you only plan to use mock mode (step 7).
+Skip this step if you only plan to use mock mode (step 6).
 
-### 6. Run the end-to-end pipeline
+### 5. Run the end-to-end pipeline
 
 ```bash
-python scripts/run_pipeline.py
+docker compose run --rm pipeline
 ```
 
-This runs all 4 stages in sequence — load data, engineer features, cluster, generate personas — and saves outputs to `data/processed/`.
+This runs all 4 stages in sequence — load data, engineer features, cluster, generate personas — and saves outputs to `data/processed/`. The `--rm` flag auto-removes the container after it exits.
 
-Useful flags:
-- `--evaluate-k` — run silhouette/inertia analysis for k=2..10 before fitting
-- `--no-save` — run everything in memory without writing files
-- `--n-clusters 5` — override the default k=7
+To pass additional flags, override the command:
 
-### 7. Run agent simulation
+```bash
+docker compose run --rm pipeline python scripts/run_pipeline.py --evaluate-k
+docker compose run --rm pipeline python scripts/run_pipeline.py --n-clusters 5
+```
+
+### 6. Run agent simulation
 
 With mock responses (no API calls, good for testing the flow):
 
 ```bash
-python scripts/evaluate.py --mock
+docker compose run --rm simulate-mock
 ```
 
-With live Claude API responses (requires the `.env` file from step 5):
+With live Claude API responses (requires the `.env` file from step 4):
 
 ```bash
-python scripts/evaluate.py
+docker compose run --rm simulate
 ```
 
 This runs 6 purchase scenarios across all 7 personas (42 simulations), validates consistency, and saves results to `notebooks/outputs/simulation/`.
 
-### 8. Testing
-
-**Pytest** — runs 16 tests using synthetic data (no raw CSVs needed):
+### 7. Run tests
 
 ```bash
-pytest tests/test_pipeline.py -v
+docker compose run --rm test
 ```
 
-Tests cover config validation, feature engineering, clustering, persona profiling, and agent mock responses. Smoke tests that require the raw data auto-skip if the CSVs aren't present.
+Runs 16 tests using synthetic data (no raw CSVs needed). Tests cover config validation, feature engineering, clustering, persona profiling, and agent mock responses. Smoke tests that require the raw data auto-skip if the CSVs aren't present.
+
+### Local development (without Docker)
+
+If you prefer running without Docker, create a virtual environment and install the package directly:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -e ".[all]"
+```
+
+Then run scripts directly:
+
+```bash
+python scripts/run_pipeline.py
+python scripts/evaluate.py --mock
+pytest tests/test_pipeline.py -v
+```
 
 **Interactive module testing** — import and run individual stages in a Python shell:
 
