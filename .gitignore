@@ -1,5 +1,9 @@
 venv/
 
+# Python build artifacts
+__pycache__/
+*.egg-info/
+
 # Data files
 /data/
 !data/.gitkeep
