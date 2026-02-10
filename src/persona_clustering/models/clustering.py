@@ -4,6 +4,7 @@ Extracted from NB3_clustering.ipynb cells 7-24.
 """
 
 from dataclasses import dataclass
+import logging
 
 import joblib
 import numpy as np
@@ -53,14 +54,18 @@ def evaluate_k_range(
     n_init: int = N_INIT,
 ) -> pd.DataFrame:
     """Run KMeans for each k, return inertia + silhouette scores.  (NB3 cell 9)"""
+    log = logging.getLogger(__name__)
     results = {"k": [], "inertia": [], "silhouette": []}
 
     for k in k_range:
+        log.info(f"  Evaluating k={k}...")
         kmeans = KMeans(n_clusters=k, random_state=random_state, n_init=n_init)
         labels = kmeans.fit_predict(X_scaled)
+        sil = silhouette_score(X_scaled, labels)
         results["k"].append(k)
         results["inertia"].append(kmeans.inertia_)
-        results["silhouette"].append(silhouette_score(X_scaled, labels))
+        results["silhouette"].append(sil)
+        log.info(f"    k={k}: silhouette={sil:.4f}, inertia={kmeans.inertia_:.0f}")
 
     return pd.DataFrame(results)
 
@@ -84,12 +89,14 @@ def run(
     save: bool = True,
 ) -> ClusteringResult:
     """Pipeline entry point: scale → (optionally evaluate k) → fit → return."""
+    log = logging.getLogger(__name__)
     X_scaled, scaler = scale_features(transformed_features)
 
     if evaluate_range:
         eval_df = evaluate_k_range(X_scaled)
-        print(eval_df.to_string(index=False))
+        log.info("\n" + eval_df.to_string(index=False))
 
+    log.info(f"  Fitting final KMeans with k={n_clusters}...")
     model, labels = fit_kmeans(X_scaled, n_clusters=n_clusters)
     sil = silhouette_score(X_scaled, labels)
 
