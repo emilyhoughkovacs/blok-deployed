@@ -1,31 +1,25 @@
+x-common: &common
+  image: persona-clustering
+  volumes:
+    - ./data:/app/data
+    - ./outputs:/app/outputs
+
 services:
   pipeline:
+    <<: *common
     build: .
-    volumes:
-      - ./data:/app/data
-      - ./outputs:/app/outputs
-    env_file:
-      - .env
     command: python scripts/run_pipeline.py
 
   simulate-mock:
-    build: .
-    volumes:
-      - ./data:/app/data
-      - ./outputs:/app/outputs
+    <<: *common
     command: python scripts/evaluate.py --mock
 
   simulate:
-    build: .
-    volumes:
-      - ./data:/app/data
-      - ./outputs:/app/outputs
+    <<: *common
     env_file:
       - .env
     command: python scripts/evaluate.py
 
   test:
-    build: .
-    volumes:
-      - ./data:/app/data
+    <<: *common
     command: pytest tests/test_pipeline.py -v
